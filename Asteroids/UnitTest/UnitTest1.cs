@@ -13,7 +13,7 @@ namespace UnitTest
         [TestInitialize]
         public void Initialize()
         {
-            model = new AsteroidsModel(3,3);
+            model = new AsteroidsModel(3, 3);
             model.NewGame();
         }
 

@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9CBEEBC5-DAE8-4EE6-B09F-1963D2792CD3}</ProjectGuid>
+    <ProjectGuid>{47FC666D-9018-4D2A-BF38-F3A12A42E419}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>UnitTest</RootNamespace>
@@ -55,11 +55,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Asteroids.Model\Asteroids.Model.csproj">
-      <Project>{1644728a-da7b-4783-af33-5e8fe8d80f3d}</Project>
+      <Project>{760a1406-af71-40d2-9e95-5b2c08b2454a}</Project>
       <Name>Asteroids.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\Asteroids.Utils\Asteroids.Utils.csproj">
-      <Project>{42100df8-ce9e-467d-8948-f1c8947f60ce}</Project>
+      <Project>{505856db-92a9-4906-883f-ff4831bbb98f}</Project>
       <Name>Asteroids.Utils</Name>
     </ProjectReference>
   </ItemGroup>

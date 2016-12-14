@@ -3,22 +3,10 @@ using System.Windows.Input;
 
 namespace Asteroids.ViewModel
 {
-    /// <summary>
-    /// Általános parancs típusa.
-    /// </summary>
     public class DelegateCommand : ICommand
     {
         private readonly Action<Object> _execute; // a tevékenységet végrehajtó lambda-kifejezés
         private readonly Func<Object, Boolean> _canExecute; // a tevékenység feltételét ellenőző lambda-kifejezés
-
-        /// <summary>
-        /// Végrehajthatóság változásának eseménye.
-        /// </summary>
-        public event EventHandler CanExecuteChanged
-        {
-            add { CommandManager.RequerySuggested += value; }
-            remove { CommandManager.RequerySuggested -= value; }
-        }
 
         /// <summary>
         /// Parancs létrehozása.
@@ -43,6 +31,11 @@ namespace Asteroids.ViewModel
         }
 
         /// <summary>
+        /// Végrehajthatóság változásának eseménye.
+        /// </summary>
+        public event EventHandler CanExecuteChanged;
+
+        /// <summary>
         /// Végrehajthatóság ellenőrzése
         /// </summary>
         /// <param name="parameter">A tevékenység paramétere.</param>
@@ -58,7 +51,20 @@ namespace Asteroids.ViewModel
         /// <param name="parameter">A tevékenység paramétere.</param>
         public void Execute(Object parameter)
         {
+            if (!CanExecute(parameter))
+            {
+                throw new InvalidOperationException("Command execution is disabled.");
+            }
             _execute(parameter);
+        }
+
+        /// <summary>
+        /// Végrehajthatóság változásának eseménykiváltása.
+        /// </summary>
+        public void RaiseCanExecuteChanged()
+        {
+            if (CanExecuteChanged != null)
+                CanExecuteChanged(this, EventArgs.Empty);
         }
     }
 }
