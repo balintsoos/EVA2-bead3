@@ -40,6 +40,7 @@
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
       <RowDefinition Height="Auto" />
+      <RowDefinition Height="Auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
       
@@ -51,6 +52,10 @@
     </StackLayout>
     <StackLayout Orientation="Horizontal" Grid.Row="2">
       <Label x:Name="timeLabel" Text="{Binding TimerLabel}" VerticalOptions="Center" />
+    </StackLayout>
+    <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Grid.Row="3">
+      <Button x:Name="leftButton" Text="LEFT" Command="{Binding TurnCommand}" CommandParameter="left" HorizontalOptions="FillAndExpand" />
+      <Button x:Name="rightButton" Text="RIGHT" Command="{Binding TurnCommand}" CommandParameter="right" HorizontalOptions="FillAndExpand" />
     </StackLayout>
     
     

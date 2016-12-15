@@ -3,6 +3,7 @@ using DLToolkit.Forms.Controls;
 using System;
 using System.Diagnostics;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
 
 namespace Asteroids.View
 {
@@ -12,14 +13,12 @@ namespace Asteroids.View
         {
             InitializeComponent();
 
-            pauseButton.IsVisible = false;
-            timeLabel.IsVisible = false;
+            Set(false, false);
         }
 
         public void OnNewGame(object sender, EventArgs e)
         {
-            pauseButton.IsVisible = true;
-            timeLabel.IsVisible = true;
+            Set(true, true);
         }
 
         public void OnFieldsChanged(object sender, FieldsChangedEventArgs args)
@@ -29,7 +28,24 @@ namespace Asteroids.View
 
         public void OnGameOver(object sender, String message)
         {
-            DisplayAlert("Game Over!", message, "OK");
+            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+            {
+                Set(true, false);
+                DisplayAlert("Game Over!", message, "OK");
+            });
+        }
+
+        private void Set(bool isVisible, bool isEnabled)
+        {
+            pauseButton.IsVisible = isVisible;
+            timeLabel.IsVisible = isVisible;
+            leftButton.IsVisible = isVisible;
+            rightButton.IsVisible = isVisible;
+
+            pauseButton.IsEnabled = isEnabled;
+            timeLabel.IsEnabled = isEnabled;
+            leftButton.IsEnabled = isEnabled;
+            rightButton.IsEnabled = isEnabled;
         }
     }
 }
