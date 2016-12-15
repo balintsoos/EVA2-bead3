@@ -1,4 +1,4 @@
-﻿namespace ELTE.ColorGrid.Windows
+﻿namespace Asteroids.Windows
 {
     public sealed partial class MainPage
     {

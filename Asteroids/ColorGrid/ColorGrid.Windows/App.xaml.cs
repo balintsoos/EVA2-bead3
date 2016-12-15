@@ -4,7 +4,7 @@ using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace ELTE.ColorGrid.Windows
+namespace Asteroids.Windows
 {
     public sealed partial class App : Application
     {
