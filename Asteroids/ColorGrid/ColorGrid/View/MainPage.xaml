@@ -6,33 +6,25 @@
              x:Class="Asteroids.View.MainPage">
    <ContentPage.Resources>
     <ResourceDictionary>
-      <Style x:Key="MediumLabelStyle" TargetType="Label">
-        <Setter Property="FontSize" Value="Medium" />
-        <!-- relatív betűméret -->
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="Margin" Value="5" />
+      <Style x:Key="FieldStyle" TargetType="Button">
+        <Setter Property="FontSize" Value="Small" />
+        <Setter Property="Margin" Value="1" />
+        <Setter Property="BorderRadius" Value="0" />
+        <Setter Property="BorderWidth" Value="0" />
+        <Setter Property="WidthRequest" Value="38" />
+        <Setter Property="HeightRequest" Value="38" />
+        <Style.Triggers>
+          <DataTrigger TargetType="Button" Binding="{Binding Type}" Value="PLAYER">
+            <Setter Property="BackgroundColor" Value="Blue" />
+          </DataTrigger>
+          <DataTrigger TargetType="Button" Binding="{Binding Type}" Value="ASTEROID">
+            <Setter Property="BackgroundColor" Value="Red" />
+          </DataTrigger>
+          <DataTrigger TargetType="Button" Binding="{Binding Type}" Value="EMPTY">
+            <Setter Property="BackgroundColor" Value="Black" />
+          </DataTrigger>
+        </Style.Triggers>
       </Style>
-      <Style x:Key="MediumButtonStyle" TargetType="Button">
-        <Setter Property="FontSize" Value="Medium" />
-        <Setter Property="BackgroundColor" Value="Blue" />
-        <Setter Property="BorderColor" Value="Blue" />
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="Margin" Value="10" />
-      </Style>
-      <Style x:Key="ColorButtonStyle" TargetType="Button">
-            <Style.Triggers>
-                <!-- a színezés a nézetmodellben lévő adat függvényében fog változni -->
-                <DataTrigger TargetType="Button" Binding="{Binding ColorNumber}" Value="0">
-                    <Setter Property="BackgroundColor" Value="Green" />
-                </DataTrigger>
-                <DataTrigger TargetType="Button" Binding="{Binding ColorNumber}" Value="1">
-                    <Setter Property="BackgroundColor" Value="White" />
-                </DataTrigger>
-                <DataTrigger TargetType="Button" Binding="{Binding ColorNumber}" Value="2">
-                    <Setter Property="BackgroundColor" Value="Red" />
-                </DataTrigger>
-            </Style.Triggers>
-        </Style>
     </ResourceDictionary>
   </ContentPage.Resources>
   <Grid>
@@ -50,13 +42,23 @@
     <StackLayout Orientation="Horizontal" Grid.Row="1">
       <Button x:Name="pauseButton" Text="{Binding PauseResumeLabel}" Command="{Binding PauseResumeCommand}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
     </StackLayout>
-    <StackLayout Orientation="Horizontal" Grid.Row="2">
-      <Label x:Name="timeLabel" Text="{Binding TimerLabel}" VerticalOptions="Center" />
+    <StackLayout HorizontalOptions="FillAndExpand" Grid.Row="2">
+      <Label x:Name="timeLabel" Text="{Binding TimerLabel}" Font="18" XAlign="Center" />
     </StackLayout>
-    <StackLayout Orientation="Horizontal" HorizontalOptions="Start" Grid.Row="3">
+    <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="3">
       <Button x:Name="leftButton" Text="LEFT" Command="{Binding TurnCommand}" CommandParameter="left" HorizontalOptions="FillAndExpand" />
       <Button x:Name="rightButton" Text="RIGHT" Command="{Binding TurnCommand}" CommandParameter="right" HorizontalOptions="FillAndExpand" />
     </StackLayout>
+
+    <controls:FlowListView Grid.Row="4" FlowColumnCount="{Binding GameSize}" FlowItemsSource="{Binding Fields}" SeparatorVisibility="None">
+      <!-- a játéktáblát egy sorfolytos listával valósítjuk meg -->
+      <controls:FlowListView.FlowColumnTemplate>
+        <DataTemplate>
+          <!-- a rács elemei gombok lesznek -->
+          <Button Style="{StaticResource FieldStyle}" VerticalOptions="Center" HorizontalOptions="Center" />
+        </DataTemplate>
+      </controls:FlowListView.FlowColumnTemplate>
+    </controls:FlowListView>
     
     
   </Grid>

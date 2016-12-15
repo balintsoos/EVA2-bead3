@@ -9,9 +9,14 @@ namespace Asteroids.View
 {
     public partial class MainPage : ContentPage
     {
-        public MainPage()
+        public int GameSize;
+
+        public MainPage(int size)
         {
             InitializeComponent();
+            FlowListView.Init();
+
+            GameSize = size;
 
             Set(false, false);
         }
