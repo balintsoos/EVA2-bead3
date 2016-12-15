@@ -25,7 +25,10 @@ namespace Asteroids.View
 
         public void OnFieldsChanged(object sender, FieldsChangedEventArgs args)
         {
-
+            foreach (Coordinate asteroid in args.Asteroids)
+            {
+                // grid.Children.Add(new Label{ Text = "Hello" }, asteroid.X, asteroid.Y);
+            }
         }
 
         public void OnGameOver(object sender, String message)

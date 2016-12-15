@@ -46,6 +46,11 @@ namespace Asteroids.ViewModel
             }
         }
 
+        public Int32 ColumnCount
+        {
+            get { return _model.GameBoard.Width; }
+        }
+
         #region Constructor
 
         public AsteroidsViewModel(AsteroidsModel model)

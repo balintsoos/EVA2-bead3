@@ -49,16 +49,18 @@
       <Button x:Name="leftButton" Text="LEFT" Command="{Binding TurnCommand}" CommandParameter="left" HorizontalOptions="FillAndExpand" />
       <Button x:Name="rightButton" Text="RIGHT" Command="{Binding TurnCommand}" CommandParameter="right" HorizontalOptions="FillAndExpand" />
     </StackLayout>
-
-    <controls:FlowListView Grid.Row="4" FlowColumnCount="{Binding GameSize}" FlowItemsSource="{Binding Fields}" SeparatorVisibility="None">
-      <!-- a játéktáblát egy sorfolytos listával valósítjuk meg -->
-      <controls:FlowListView.FlowColumnTemplate>
-        <DataTemplate>
-          <!-- a rács elemei gombok lesznek -->
-          <Button Style="{StaticResource FieldStyle}" VerticalOptions="Center" HorizontalOptions="Center" />
-        </DataTemplate>
-      </controls:FlowListView.FlowColumnTemplate>
-    </controls:FlowListView>
+    <view:AutoSizeContentView Grid.Row="4">
+      <!-- automatikusan méreteződő tartalom -->
+      <controls:FlowListView FlowItemsSource="{Binding Fields}" FlowColumnCount="{Binding ColumnCount}" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="500" HeightRequest="500">
+        <!-- külső vezérlő, amelyből rácsot készítünk -->
+        <controls:FlowListView.FlowColumnTemplate>
+          <DataTemplate>
+            <Button Command="{Binding FieldChangeCommand}" CommandParameter="{Binding}" Style="{StaticResource ColorButtonStyle}" />
+            <!-- a rácsot négyzetes gombokkal töltjük fel -->
+          </DataTemplate>
+        </controls:FlowListView.FlowColumnTemplate>
+      </controls:FlowListView>
+    </view:AutoSizeContentView>
     
     
   </Grid>
