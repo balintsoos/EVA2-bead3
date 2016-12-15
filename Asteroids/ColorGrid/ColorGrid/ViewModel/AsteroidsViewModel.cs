@@ -51,6 +51,8 @@ namespace Asteroids.ViewModel
             get { return _model.GameBoard.Width; }
         }
 
+        public ObservableCollection<Field> Fields { get; private set; }
+
         #region Constructor
 
         public AsteroidsViewModel(AsteroidsModel model)
@@ -65,6 +67,8 @@ namespace Asteroids.ViewModel
             TurnCommand = new DelegateCommand(param => Turn(param.ToString()));
 
             TimerLabel = "0";
+
+            Fields = new ObservableCollection<Field>();
         }
 
         #endregion
@@ -73,6 +77,35 @@ namespace Asteroids.ViewModel
 
         private void Model_FieldsChanged(object sender, EventArgs e)
         {
+            FieldType[][] matrix = new FieldType[_model.GameBoard.Width][];
+
+            for(int i = 0; i < matrix.Length; i++)
+            {
+                matrix[i] = new FieldType[_model.GameBoard.Height];
+
+                for (int j = 0; j < matrix[i].Length; j++)
+                {
+                    matrix[i][j] = FieldType.EMPTY;
+                }
+            }
+
+            foreach (Coordinate asteroid in _model.Asteroids)
+            {
+                matrix[asteroid.X][asteroid.Y] = FieldType.ASTEROID;
+            }
+
+            matrix[_model.Player.X][_model.Player.Y] = FieldType.PLAYER;
+
+            Fields.Clear();
+
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                for (int j = 0; j < matrix[i].Length; j++)
+                {
+                    Fields.Add(new Field(i, j, matrix[i][j]));
+                }
+            }
+
             OnFieldsChanged?.Invoke(this, new FieldsChangedEventArgs(_model.Player, _model.Asteroids));
         }
 

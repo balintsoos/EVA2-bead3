@@ -55,7 +55,7 @@
         <!-- külső vezérlő, amelyből rácsot készítünk -->
         <controls:FlowListView.FlowColumnTemplate>
           <DataTemplate>
-            <Button Command="{Binding FieldChangeCommand}" CommandParameter="{Binding}" Style="{StaticResource ColorButtonStyle}" />
+            <Button Style="{StaticResource ColorButtonStyle}" />
             <!-- a rácsot négyzetes gombokkal töltjük fel -->
           </DataTemplate>
         </controls:FlowListView.FlowColumnTemplate>
