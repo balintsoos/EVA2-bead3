@@ -44,22 +44,21 @@
     </Grid.RowDefinitions>
       
     <StackLayout Orientation="Horizontal" Grid.Row="0">
-      <Label Text="Rows:" VerticalOptions="Start" Style="{StaticResource MediumLabelStyle}" />
-      <Slider Minimum="0" Maximum="10" Value="{Binding RowCount}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />      
+      <Button Text="New Game" Command="{Binding NewGameCommand}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
     </StackLayout>
     <StackLayout Orientation="Horizontal" Grid.Row="1">
-      <Label Text="Cols:" VerticalOptions="Start" Style="{StaticResource MediumLabelStyle}" />
-      <Slider Minimum="0" Maximum="10" Value="{Binding ColumnCount}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
-      <!-- a maximumot hozzákötjük a másik vezérlőhöz -->
+      <Button Text="{Binding PauseResumeLabel}" Command="{Binding PauseResumeCommand}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
     </StackLayout>
-    <Button Command="{Binding ChangeSizeCommand}" Text="Change size" Style="{StaticResource MediumButtonStyle}" Grid.Row="2" />
+    <StackLayout Orientation="Horizontal" Grid.Row="2">
+      <Label Text="{Binding TimerLabel}" VerticalOptions="Center" />
+    </StackLayout>
+    
     <view:AutoSizeContentView Grid.Row="3">
       <!-- automatikusan méreteződő tartalom -->
       <controls:FlowListView FlowItemsSource="{Binding Fields}" FlowColumnCount="{Binding ColumnCount}" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="500" HeightRequest="500">
         <!-- külső vezérlő, amelyből rácsot készítünk -->
         <controls:FlowListView.FlowColumnTemplate>
           <DataTemplate>
-            <view:SquareButton Command="{Binding FieldChangeCommand}" CommandParameter="{Binding}" Style="{StaticResource ColorButtonStyle}" />
             <!-- a rácsot négyzetes gombokkal töltjük fel -->
           </DataTemplate>
         </controls:FlowListView.FlowColumnTemplate>
