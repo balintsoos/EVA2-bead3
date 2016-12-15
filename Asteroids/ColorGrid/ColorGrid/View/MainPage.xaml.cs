@@ -1,6 +1,7 @@
 ﻿using Asteroids.Utils;
 using DLToolkit.Forms.Controls;
 using System;
+using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration;
@@ -9,14 +10,10 @@ namespace Asteroids.View
 {
     public partial class MainPage : ContentPage
     {
-        public int GameSize;
-
-        public MainPage(int size)
+        public MainPage()
         {
             InitializeComponent();
             FlowListView.Init();
-
-            GameSize = size;
 
             Set(false, false);
         }

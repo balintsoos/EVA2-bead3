@@ -19,7 +19,7 @@ namespace Asteroids
             _board = new Board(5, 5);
             _viewModel = new AsteroidsViewModel(new AsteroidsModel(_board.Width, _board.Width));
 
-            _gamePage = new MainPage(_board.Width);
+            _gamePage = new MainPage();
 
             _viewModel.OnNewGame += new EventHandler(_gamePage.OnNewGame);
             _viewModel.OnGameOver += new EventHandler<String>(_gamePage.OnGameOver);
