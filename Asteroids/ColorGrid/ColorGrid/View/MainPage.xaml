@@ -47,23 +47,13 @@
       <Button Text="New Game" Command="{Binding NewGameCommand}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
     </StackLayout>
     <StackLayout Orientation="Horizontal" Grid.Row="1">
-      <Button Text="{Binding PauseResumeLabel}" Command="{Binding PauseResumeCommand}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
+      <Button x:Name="pauseButton" Text="{Binding PauseResumeLabel}" Command="{Binding PauseResumeCommand}" VerticalOptions="Center" HorizontalOptions="FillAndExpand" />
     </StackLayout>
     <StackLayout Orientation="Horizontal" Grid.Row="2">
-      <Label Text="{Binding TimerLabel}" VerticalOptions="Center" />
+      <Label x:Name="timeLabel" Text="{Binding TimerLabel}" VerticalOptions="Center" />
     </StackLayout>
     
-    <view:AutoSizeContentView Grid.Row="3">
-      <!-- automatikusan méreteződő tartalom -->
-      <controls:FlowListView FlowItemsSource="{Binding Fields}" FlowColumnCount="{Binding ColumnCount}" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="500" HeightRequest="500">
-        <!-- külső vezérlő, amelyből rácsot készítünk -->
-        <controls:FlowListView.FlowColumnTemplate>
-          <DataTemplate>
-            <!-- a rácsot négyzetes gombokkal töltjük fel -->
-          </DataTemplate>
-        </controls:FlowListView.FlowColumnTemplate>
-      </controls:FlowListView>      
-    </view:AutoSizeContentView>
+    
   </Grid>
 
 </ContentPage>
