@@ -11,8 +11,8 @@
         <Setter Property="Margin" Value="1" />
         <Setter Property="BorderRadius" Value="0" />
         <Setter Property="BorderWidth" Value="0" />
-        <Setter Property="WidthRequest" Value="38" />
-        <Setter Property="HeightRequest" Value="38" />
+        <Setter Property="WidthRequest" Value="50" />
+        <Setter Property="HeightRequest" Value="50" />
         <Style.Triggers>
           <DataTrigger TargetType="Button" Binding="{Binding Type}" Value="PLAYER">
             <Setter Property="BackgroundColor" Value="Blue" />
