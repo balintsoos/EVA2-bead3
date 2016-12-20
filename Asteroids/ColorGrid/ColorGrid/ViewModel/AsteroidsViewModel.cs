@@ -5,6 +5,7 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
+using Xamarin.Forms;
 
 namespace Asteroids.ViewModel
 {
@@ -77,36 +78,39 @@ namespace Asteroids.ViewModel
 
         private void Model_FieldsChanged(object sender, EventArgs e)
         {
-            FieldType[][] matrix = new FieldType[_model.GameBoard.Width][];
-
-            for(int i = 0; i < matrix.Length; i++)
+            Device.BeginInvokeOnMainThread(() =>
             {
-                matrix[i] = new FieldType[_model.GameBoard.Height];
+                FieldType[][] matrix = new FieldType[_model.GameBoard.Width][];
 
-                for (int j = 0; j < matrix[i].Length; j++)
+                for (int i = 0; i < matrix.Length; i++)
                 {
-                    matrix[i][j] = FieldType.EMPTY;
+                    matrix[i] = new FieldType[_model.GameBoard.Height];
+
+                    for (int j = 0; j < matrix[i].Length; j++)
+                    {
+                        matrix[i][j] = FieldType.EMPTY;
+                    }
                 }
-            }
 
-            foreach (Coordinate asteroid in _model.Asteroids)
-            {
-                matrix[asteroid.X][asteroid.Y] = FieldType.ASTEROID;
-            }
-
-            matrix[_model.Player.X][_model.Player.Y] = FieldType.PLAYER;
-
-            Fields.Clear();
-
-            for (int i = 0; i < matrix.Length; i++)
-            {
-                for (int j = 0; j < matrix[i].Length; j++)
+                foreach (Coordinate asteroid in _model.Asteroids)
                 {
-                    Fields.Add(new Field(i, j, matrix[i][j]));
+                    matrix[asteroid.X][asteroid.Y] = FieldType.ASTEROID;
                 }
-            }
 
-            OnFieldsChanged?.Invoke(this, new FieldsChangedEventArgs(_model.Player, _model.Asteroids));
+                matrix[_model.Player.X][_model.Player.Y] = FieldType.PLAYER;
+
+                Fields.Clear();
+
+                for (int i = 0; i < matrix.Length; i++)
+                {
+                    for (int j = 0; j < matrix[i].Length; j++)
+                    {
+                        Fields.Add(new Field(i, j, matrix[j][i]));
+                    }
+                }
+
+                OnFieldsChanged?.Invoke(this, new FieldsChangedEventArgs(_model.Player, _model.Asteroids));
+            });
         }
 
         private void Model_TimePassed(object sender, int time)
